@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+<title>Contact Page</title>
+{% block content %}
+<div class='text-center'>
+        <h1>Welcome to ECommerce</h1>
+        
+        <h1>{{ title }}</h1>
+  </div>
+  <div class='container'>
+      <div class='row'>
+          <div class='col'>
+            <p>{{ content }}</p>
+            <div class='col-md-6 col-12 mx-auto'>
+                    <form class='contact-form' method='POST' action='{% url "contact" %}'><!--contact-form is selector used for jQuery..go to base.html to use it -->
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-default">SUBMIT</button>
+                    </form>
+                </div>
+           
+           
+           
+                <!-- <div class='col-sm-6 col-12'>
+                <form method='POST'>
+                    {% csrf_token %}
+                    <input type='text' class='form-control' placeholder="Name" name='fullname'>
+                    <input type='email' class='form-control' placeholder="Email" name='email'>
+                    <textarea name='content' class='form-control' placeholder='your content'></textarea>
+                    <button type='submit' class='btn btn-default'>Submit</button>
+                </form>
+            </div>!-->
+          
+        
+        
+        
+        </div>
+      </div>
+  </div>
+
+
+{% endblock %}

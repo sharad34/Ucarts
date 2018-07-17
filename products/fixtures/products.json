@@ -1,0 +1,226 @@
+[
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "Tommy Hilfiger jacket",
+        "slug": "tommy-hilfiger-jacket",
+        "description": "Tommy Hilfiger jacket",
+        "price": "12000.00",
+        "image": "products/3506665411/3506665411.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:18:11.155Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "shirt2",
+        "slug": "shirt2",
+        "description": "J & J",
+        "price": "2000.00",
+        "image": "products/455564879/455564879.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:23:34.741Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "levis shirt",
+        "slug": "levis-shirt",
+        "description": "levis shirt",
+        "price": "1300.00",
+        "image": "products/39285412/39285412.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:24:06.352Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "title": "popo and ralph jeans 1",
+        "slug": "popo-and-ralph-jeans-1",
+        "description": "popo and ralph jeans 1",
+        "price": "2000.00",
+        "image": "products/1355727834/1355727834.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:24:45.280Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+        "title": "shirt3",
+        "slug": "shirt3",
+        "description": "shirt3",
+        "price": "39.99",
+        "image": "products/3125861964/3125861964.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:25:07.946Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "title": "shirt4",
+        "slug": "shirt4",
+        "description": "shirt4",
+        "price": "2000.00",
+        "image": "products/1991620849/1991620849.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:25:24.599Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "shirt5",
+        "slug": "shirt5",
+        "description": "shirt5",
+        "price": "1400.00",
+        "image": "products/1228943789/1228943789.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:25:42.176Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "title": "jeans1",
+        "slug": "jeans1",
+        "description": "jeans1",
+        "price": "2400.00",
+        "image": "products/3574162175/3574162175.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:26:11.302Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+        "title": "jeans2",
+        "slug": "jeans2",
+        "description": "jeans2",
+        "price": "3000.00",
+        "image": "products/185469485/185469485.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:26:30.684Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+        "title": "jeans3",
+        "slug": "jeans3",
+        "description": "jeans3",
+        "price": "4000.00",
+        "image": "products/1401567674/1401567674.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:26:52.879Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+        "title": "jeans4",
+        "slug": "jeans4",
+        "description": "jeans4",
+        "price": "3300.00",
+        "image": "products/407090062/407090062.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:27:11.545Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+        "title": "tshirt1",
+        "slug": "tshirt1",
+        "description": "tshirt1",
+        "price": "800.00",
+        "image": "products/3597847706/3597847706.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:27:29.474Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+        "title": "tshirt2",
+        "slug": "tshirt2",
+        "description": "tshirt2",
+        "price": "1200.00",
+        "image": "products/2875957043/2875957043.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:27:34.801Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+        "title": "tshirt3",
+        "slug": "tshirt3",
+        "description": "tshirt3",
+        "price": "2000.00",
+        "image": "products/862640474/862640474.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:27:52.153Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+        "title": "tshirt4",
+        "slug": "tshirt4",
+        "description": "tshirt4",
+        "price": "2000.00",
+        "image": "products/457407629/457407629.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:28:22.021Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+        "title": "tshirt5",
+        "slug": "tshirt5",
+        "description": "tshirt5",
+        "price": "2200.00",
+        "image": "products/3384353400/3384353400.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2018-06-15T08:28:39.840Z"
+    }
+}
+]

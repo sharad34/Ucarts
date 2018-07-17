@@ -1,0 +1,6 @@
+{{ object.title }}<br/>
+{{ object.description }}<br/>
+{{ object.price }}<br/>
+{% if object.image %}
+<img src="{{ object.image.url }}" class="img-fluid" width="450" height="450"/>
+{% endif %}

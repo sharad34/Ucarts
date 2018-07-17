@@ -1,0 +1,286 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   
+    <title>Base Template</title>
+   
+  {% include 'base/css.html' %}
+  {% block base_head %}{% endblock %}
+  </head>
+  <body>
+   {% include 'base/navbar.html' with brand_name='eCommerce' %} 
+   <div class="container">  
+    {% if messages %}
+    <div class ="alert alert-success messages">
+    {% for message in messages %}
+    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}</br>
+      </span>
+        {% endfor %}
+</div>
+{% endif %}
+ {% block content %}{% endblock %}
+   </div>
+      {% include 'base/js.html' %}
+      {% block javascript %}
+      {% endblock %}
+     </body>
+ </html>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script>
+  $(document).ready(function(){
+  //Contact form handler
+
+    var  contactForm=$(".contact-form")
+    var contactFormMethod =contactForm.attr("method")
+    var contactFormEndPoint =contactForm.attr("action") //abc/
+    function displaySubmitting(submitBtn, deafultText, doSubmit)
+    {
+      if(doSubmit)
+      {
+      submitBtn.addClass("disabled")
+      submitBtn.html("<i class='fa fa-spin fa-spinner'></i> Sending....")  
+      }
+      else
+      {
+      submitBtn.removeClass("disabled")
+      submitBtn.html(defaultText)  
+      }
+      
+    }
+
+
+    contactForm.submit(function(event){
+      event.preventDefault()
+      
+      var contactFormSubmitBtn=contactForm.find("[type='submit']")
+      var contactFormSubmitBtnTxt=contactFormSubmitBtn.text()
+    
+
+      var contactFormData=contactForm.serialize()
+      var thisForm=$(this)
+      displaySubmitting(contactFormSubmitBtn, "", true)
+      
+      $.ajax({
+        method: contactFormMethod,
+        url: contactFormEndPoint,
+        data: contactFormData,
+        
+        success: function(data){
+          contactForm[0].reset()
+          $.alert({ 
+          title:"Success",
+          content:data.message,
+          theme:"modern",//now go in views to the form which handles it to return some data
+        })
+        setTimeout(function(){
+          displaySubmitting(contactFormSubmitBtn, contactFormSubmitBtnTxt, false)
+        }, 500)  
+        },
+        
+        error: function(error){//might run into errors for things validating on the form side
+            
+          console.log(error.responseJSON)
+          var jsonData = error.responseJSON
+          var msg=""
+
+          $.each(jsonData, function(key, value){//.................json data is a dict
+            msg+= key + ": " + value[0].message +"</br>"
+          })
+
+          $.alert({ 
+          title:"Oops",//$added after adding jQuery Confirm
+          content:msg,
+          theme:"modern",
+        })  
+        setTimeout(function(){
+        displaySubmitting(contactFormSubmitBtn, contactFormSubmitBtnTxt, false)
+        }, 500)         
+      }
+    })
+})
+
+
+
+
+  //Auto Search
+    var searchForm=$(".search-form")
+    var searchInput= searchForm.find("[name='q']")// input name='q'
+    var typingTimer;
+    var  typingInterval=500 // .5 seconds
+    var searchBtn=searchForm.find("[type='submit']")
+//key released
+    searchInput.keyup(function(event){
+      //console.log(searchInput.val())
+      
+      typingTimer=setTimeout(performSearch,typingInterval)
+
+    })
+//key pressed
+    searchInput.keydown(function(event){
+      clearTimeout(typingTimer)
+    })
+
+    function displaySearching()
+    {
+      searchBtn.addClass("disabled")
+      searchBtn.html("<i class='fa fa-spin fa-spinner'></i> Searching....")
+    }
+
+    function performSearch()
+    { 
+      displaySearching()
+      var query=searchInput.val()
+      setTimeout(function(){
+        window.location.href='/search/?q=' + query  
+      },1000)
+    }
+
+
+  //Cart + Add Products
+  var productForm=$(".form-product-ajax")//actual form for product that we will handle
+
+  productForm.submit(function(event)
+  {
+      event.preventDefault();//not allow the form to be submitted
+      //console.log("form is not sending")
+      var thisForm=$(this)//grabbing the data related to this form
+      //var actionEndPoint=thisForm.attr("action");// API endpoint..used to make it work even if user disables javascript
+      var actionEndPoint=thisForm.attr("data-endpoint")//refer updatecart.html
+      var httpMethod=thisForm.attr("method");
+      var formData=thisForm.serialize();
+
+    //      console.log(thisForm.attr("action"),thisForm.attr("method"))
+      $.ajax({
+        url:actionEndPoint,
+        method:httpMethod,
+        data:formData,
+        success: function(data){  
+          //console.log("success")
+          //console.log(data)
+          //console.log("Added",data.added)
+          //console.log("Removed",data.removed)
+          var submitSpan=thisForm.find(".submit-span")
+          if (data.added)
+          {
+            submitSpan.html("In Cart <Button type='submit' class='btn btn-danger'>Remove from Cart</Button>")
+            //gives the html data int there    
+          }
+          else
+          {
+            submitSpan.html("<Button type='submit' class='btn btn-success'>Add To Cart</Button>")
+          }
+          var navbarCount=$(".navbar-cart-count")
+          navbarCount.text(data.cartItemCount)
+          var currentPath=window.location.href
+          if(currentPath.indexOf("cart")!=-1)
+          {
+            refreshCart()
+          }
+            
+        },
+        error: function(errorData)
+        {
+          $.alert({
+
+          title:"Oops",//$added after adding jQuery Confirm
+          content:"An Error Occured",
+          theme:"modern",
+        })
+         // console.log("error")
+          //  console.log(errorData)
+        }
+          })
+
+      })
+      function refreshCart()//need this function to update the cart
+      {
+          console.log("in current cart")
+          var cartTable = $(".cart-table")
+          var cartBody = cartTable.find(".cart-body")
+          //cartBody.html("<h1>Changed</h1>")
+          var currentUrl=window.location.href
+          var productRows=cartBody.find(".cart-product")//as we called it cart-products in tr tag class of home.html
+          //productRows.html("<tr><td colspan=3>Coming Soon</td></tr>")
+
+          var refreshCartUrl='/api/cart/'
+          var refreshCartMethod="GET";
+          var data={};
+
+          $.ajax({
+            url:refreshCartUrl,
+            method:refreshCartMethod,
+            data:data,
+            success: function(data)
+            {
+              var hiddenCartItemRemoveForm=$(".cart-item-remove-form")
+              console.log("success")
+              console.log(data)
+              if(data.products.length>0)//as it is an array
+              {
+                productRows.html("")
+                i=data.products.length
+                $.each(data.products, function(index, value)
+                {
+                  console.log(value)
+                  var newCartItemRemove=hiddenCartItemRemoveForm.clone()
+                  newCartItemRemove.css("display","block")
+                  newCartItemRemove.find(".cart-item-product-id").val(value.id)
+                  cartBody.prepend("<tr><th scope=\"row\">" + i + "</th><td><a href='" + value.url +"'>" + value.name + "</a>" + newCartItemRemove.html() + "</td><td>" + value.price + "</td></tr>")
+                  i--
+                  
+                })
+                cartBody.find(".cart-subtotal").text(data.subtotal)
+                cartBody.find(".cart-total").text(data.total)
+              }
+              else
+              {
+                window.location.href=currentUrl
+              }
+                            
+            },
+            error: function(errorData)
+            {
+                $.alert({
+
+          title:"Oops",//$added after adding jQuery Confirm
+          content:"An Error Occured",
+          theme:"modern",
+        })
+        //      console.log("error")
+         //     console.log(errorData)
+            }
+
+          })
+      }
+
+  })
+</script>
+</body>
+</html>
